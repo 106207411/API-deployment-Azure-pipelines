@@ -1,0 +1,23 @@
+pool:
+  name: Azure Pipelines
+steps:
+- task: Docker@0
+  displayName: 'Build an image'
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise 訂閱 – MPN (e844f80a-f62d-4cf2-b47d-2a330e7093bf)'
+    azureContainerRegistry: '{"loginServer":"chimeiapiacr.azurecr.io", "id" : "/subscriptions/e844f80a-f62d-4cf2-b47d-2a330e7093bf/resourceGroups/teams_chatgpt/providers/Microsoft.ContainerRegistry/registries/chimeiapiacr"}'
+    dockerFile: Dockerfile
+
+- task: Docker@0
+  displayName: 'Push an image'
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise 訂閱 – MPN (e844f80a-f62d-4cf2-b47d-2a330e7093bf)'
+    azureContainerRegistry: '{"loginServer":"chimeiapiacr.azurecr.io", "id" : "/subscriptions/e844f80a-f62d-4cf2-b47d-2a330e7093bf/resourceGroups/teams_chatgpt/providers/Microsoft.ContainerRegistry/registries/chimeiapiacr"}'
+    action: 'Push an image'
+
+- task: AzureWebAppContainer@1
+  displayName: 'Azure Web App on Container Deploy: chimei-chat'
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise 訂閱 – MPN (e844f80a-f62d-4cf2-b47d-2a330e7093bf)'
+    appName: 'chimei-chat'
+    containers: 'chimeiapiacr.azurecr.io/$(Build.Repository.Name):$(Build.BuildId)'
