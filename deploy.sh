@@ -41,7 +41,7 @@ ACR_PASSWORD=$(az acr credential show \
 # Deploy the container image to an exsisiting Azure App Service.
 az webapp config container set \
   --name $app_name \
-    --resource-group $resource_group \
+  --resource-group $resource_group \
   --docker-custom-image-name $image_name \
   --docker-registry-server-url $acr_url \
   --docker-registry-server-user $acr_name \
