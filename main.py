@@ -98,7 +98,7 @@ class ChatReadCacheApproach():
       return history_cache
 
 
-app = FastAPI(title="AOAI Chat GPT API (Deployed with Azure Pipelines)")
+app = FastAPI(title="AOAI Chat GPT API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
