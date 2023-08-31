@@ -7,8 +7,8 @@ image_name=chimeiapiacr.azurecr.io/fastapi-demo:latest
 
 
 # Create an Azure Container Registry with the az acr create command.
-# az acr create --resource-group $resource_group \
-#     --name $acr_name --sku Basic --admin-enabled true
+az acr create --resource-group $resource_group \
+    --name $acr_name --sku Basic --admin-enabled true
 
 ACR_PASSWORD=$(az acr credential show \
     --resource-group $resource_group \
@@ -17,26 +17,26 @@ ACR_PASSWORD=$(az acr credential show \
     --output tsv)
 
 # Push the Docker image to the Azure Container Registry created from the Dockerfile in the current directory.
-# az acr build --image fastapi-demo \
-#   --registry $acr_name \
-#   --file Dockerfile .
+az acr build --image fastapi-demo \
+  --registry $acr_name \
+  --file Dockerfile .
 
 # Create an App Service plan with the az appservice plan command.
-# az appservice plan create \
-#     --name $app_name \
-#     --resource-group $resource_group \
-#     --sku B1 \
-#     --is-linux
+az appservice plan create \
+    --name $app_name \
+    --resource-group $resource_group \
+    --sku B1 \
+    --is-linux
 
 # Deploy the container image to Azure App Service.
-# az webapp create \
-#     --name $app_name \
-#     --resource-group $resource_group \
-#     --plan $app_plan_name \
-#     --docker-registry-server-password $ACR_PASSWORD \
-#     --docker-registry-server-user $acr_name \
-#     --role acrpull \
-#     --deployment-container-image-name $image_name
+az webapp create \
+    --name $app_name \
+    --resource-group $resource_group \
+    --plan $app_plan_name \
+    --docker-registry-server-password $ACR_PASSWORD \
+    --docker-registry-server-user $acr_name \
+    --role acrpull \
+    --deployment-container-image-name $image_name
 
 # Deploy the container image to an exsisiting Azure App Service.
 az webapp config container set \

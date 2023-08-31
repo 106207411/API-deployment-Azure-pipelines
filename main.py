@@ -53,7 +53,7 @@ class ChatReadCacheApproach():
          self.history.append({"role": "user", "content": self.request_chat_data.user_query})
          # Call the OpenAI API
          response = openai.ChatCompletion.create(
-            deployment_id=AoaiConfig["AoaiChatGptDeployName"],
+            deployment_id=self.chatgpt_deployment,
             messages=self.history,
             max_tokens=self.request_chat_data.max_response if self.request_chat_data.max_response else self.chat_config["MaxTokens"],
             temperature=self.request_chat_data.temperature if self.request_chat_data.temperature else self.chat_config["Temperature"],
