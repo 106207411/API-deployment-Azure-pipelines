@@ -41,7 +41,9 @@ This project provides an API for interacting with the AOAI Chatbot. It uses Fast
 All the credentials can be configured in `config.py`. You can modify the `ChatCacheCount` to change the number of chat histories to be cached. The default value is 3.
 
 ## Deploy by Azure Pipeline
-The API can be deployed to Azure App Service using Docker. This project implements CI/CD process with Azure Pipeline to auto deploy the API to Azure App Service whenever a new commit is pushed to the `main` branch of the [repository](https://dev.azure.com/aceraeb/TestForAndy/_git/pipelines-fastapi-docker). The pipeline is defined in `azure-pipelines.yml`.
+The API can be deployed to Azure App Service using Docker. This project implements CI/CD process with Azure Pipelines to auto deploy the API to Azure App Service whenever a new commit is pushed to the `main` branch of the [repository](https://dev.azure.com/aceraeb/TestForAndy/_git/pipelines-fastapi-docker). The pipeline is defined in `azure-pipelines.yml`.
+
+![image](img/devops.png)
 
 ## Deploy by Azure CLI
 You can also build the docker image and push it to Azure Container Registry. Then, it will deploy the image to Azure App Service. The script is defined in `deploy.sh`.
